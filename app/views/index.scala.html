@@ -1,0 +1,28 @@
+@(signupForm: Form[User], users: Iterable[User])
+
+@import helper.twitterBootstrap._
+@import models.User
+
+
+@main("Welcome to Open Reviews") {
+    <div class="row">
+        <div class="col-xs-8">
+        @for(u <- users.iterator()) {
+            <li>@u.username</li>
+        }
+        </div>
+
+        <div class="col-xs-4">
+        @helper.form(action = routes.SignUpController.submit()) {
+
+            @helper.inputText(signupForm("username"))
+
+            @helper.inputText(signupForm("email"))
+
+            @helper.inputPassword(signupForm("password"))
+
+            <button type="submit">Start using Open Review</button>
+        }
+        </div>
+    </div>
+}

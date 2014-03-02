@@ -1,0 +1,28 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    apt (2.3.8)
+    build-essential (1.4.2)
+    java (1.19.2)
+    mongodb (0.13.7)
+      apt (>= 1.8.2)
+      python (>= 0.0.0)
+      runit (>= 1.1.6)
+      yum (>= 0.0.0)
+    python (1.4.6)
+      build-essential (>= 0.0.0)
+      yum-epel (>= 0.0.0)
+    runit (1.5.8)
+      build-essential (>= 0.0.0)
+      yum (~> 3.0)
+      yum-epel (>= 0.0.0)
+    sbt-extras (0.2.2)
+      java (>= 0.0.0)
+    yum (3.1.2)
+    yum-epel (0.3.4)
+      yum (~> 3.0)
+
+DEPENDENCIES
+  mongodb (>= 0)
+  sbt-extras (>= 0)
+
