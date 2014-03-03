@@ -4,6 +4,8 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
+Vagrant.require_plugin "vagrant-vbguest"
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
@@ -98,7 +100,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # end
 
 $script = <<SCRIPT
-apt-get install -y ruby-dev
+apt-get install -y ruby-dev bundler
 cd /vagrant/kitchen
 bundle install --deployment --binstubs
 bundle exec librarian-chef install
@@ -107,7 +109,7 @@ SCRIPT
   config.vm.provision :shell, inline: $script
 
   config.vm.provision :chef_solo do |chef|
-    chef.binary_path = "/vagrant/kitchen/bin/chef-solo"
+    chef.binary_path = "/vagrant/kitchen/bin/"
     chef.cookbooks_path = ["kitchen/site-cookbooks", "kitchen/cookbooks"]
     chef.roles_path = "kitchen/roles"
     chef.data_bags_path = "kitchen/data_bags"
