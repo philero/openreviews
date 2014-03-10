@@ -1,7 +1,9 @@
 // -*- mode: scala -*-
 import play.Project._
 
-name := "Open reviews"
+name := "openreviews"
+
+organization := "com.github.openreviews"
 
 version := "0.1-SNAPSHOT"
 
@@ -21,5 +23,13 @@ libraryDependencies ++= Seq(
 )
 
 
-
 playJavaSettings
+
+val dependenciesUrl = TaskKey[Seq[String]]("dependenciesUrl", "List dependencies urls")
+
+dependenciesUrl <<= (update in Runtime) map {(u) =>
+ u.configuration("runtime") match {
+   case Some(conf) => conf.modules.flatMap(_.artifacts.map{case (art,_) => art.url.map(_.toString).getOrElse("No URL")})
+   case None => List("No such configuration")
+ }
+}
